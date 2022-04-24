@@ -11,6 +11,14 @@
 		71F791232815BDB00012426E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791222815BDB00012426E /* ContentView.swift */; };
 		71F791252815BDB00012426E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71F791242815BDB00012426E /* Assets.xcassets */; };
 		71F791282815BDB00012426E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71F791272815BDB00012426E /* Preview Assets.xcassets */; };
+		71F791302815BDCE0012426E /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 71F7912F2815BDCE0012426E /* ComposableArchitecture */; };
+		71F7913B2815BDF90012426E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791322815BDF90012426E /* NetworkManager.swift */; };
+		71F7913C2815BDF90012426E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791332815BDF90012426E /* HTTPMethod.swift */; };
+		71F7913D2815BDF90012426E /* LawService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791352815BDF90012426E /* LawService.swift */; };
+		71F7913E2815BDF90012426E /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791372815BDF90012426E /* Question.swift */; };
+		71F7913F2815BDF90012426E /* Law.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791382815BDF90012426E /* Law.swift */; };
+		71F791402815BDF90012426E /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791392815BDF90012426E /* Scenario.swift */; };
+		71F791412815BDF90012426E /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F7913A2815BDF90012426E /* Difficulty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +27,13 @@
 		71F791222815BDB00012426E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		71F791242815BDB00012426E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71F791272815BDB00012426E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		71F791322815BDF90012426E /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		71F791332815BDF90012426E /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		71F791352815BDF90012426E /* LawService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LawService.swift; sourceTree = "<group>"; };
+		71F791372815BDF90012426E /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		71F791382815BDF90012426E /* Law.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Law.swift; sourceTree = "<group>"; };
+		71F791392815BDF90012426E /* Scenario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scenario.swift; sourceTree = "<group>"; };
+		71F7913A2815BDF90012426E /* Difficulty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71F791302815BDCE0012426E /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +67,9 @@
 		71F7911F2815BDB00012426E /* Lawme */ = {
 			isa = PBXGroup;
 			children = (
+				71F791362815BDF90012426E /* Model */,
+				71F791312815BDF90012426E /* Networking */,
+				71F791342815BDF90012426E /* Services */,
 				71F791202815BDB00012426E /* LawmeApp.swift */,
 				71F791222815BDB00012426E /* ContentView.swift */,
 				71F791242815BDB00012426E /* Assets.xcassets */,
@@ -65,6 +84,34 @@
 				71F791272815BDB00012426E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		71F791312815BDF90012426E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				71F791322815BDF90012426E /* NetworkManager.swift */,
+				71F791332815BDF90012426E /* HTTPMethod.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		71F791342815BDF90012426E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				71F791352815BDF90012426E /* LawService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		71F791362815BDF90012426E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				71F791372815BDF90012426E /* Question.swift */,
+				71F791382815BDF90012426E /* Law.swift */,
+				71F791392815BDF90012426E /* Scenario.swift */,
+				71F7913A2815BDF90012426E /* Difficulty.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +130,9 @@
 			dependencies = (
 			);
 			name = Lawme;
+			packageProductDependencies = (
+				71F7912F2815BDCE0012426E /* ComposableArchitecture */,
+			);
 			productName = Lawme;
 			productReference = 71F7911D2815BDB00012426E /* Lawme.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +161,9 @@
 				Base,
 			);
 			mainGroup = 71F791142815BDB00012426E;
+			packageReferences = (
+				71F7912E2815BDCE0012426E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 71F7911E2815BDB00012426E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,8 +190,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71F7913C2815BDF90012426E /* HTTPMethod.swift in Sources */,
+				71F7913B2815BDF90012426E /* NetworkManager.swift in Sources */,
 				71F791232815BDB00012426E /* ContentView.swift in Sources */,
+				71F7913E2815BDF90012426E /* Question.swift in Sources */,
+				71F7913D2815BDF90012426E /* LawService.swift in Sources */,
+				71F791412815BDF90012426E /* Difficulty.swift in Sources */,
+				71F791402815BDF90012426E /* Scenario.swift in Sources */,
 				71F791212815BDB00012426E /* LawmeApp.swift in Sources */,
+				71F7913F2815BDF90012426E /* Law.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,8 +333,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -284,7 +346,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -302,8 +364,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,7 +377,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -339,6 +403,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		71F7912E2815BDCE0012426E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		71F7912F2815BDCE0012426E /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71F7912E2815BDCE0012426E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 71F791152815BDB00012426E /* Project object */;
 }
