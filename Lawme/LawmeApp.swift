@@ -11,7 +11,13 @@ import SwiftUI
 struct LawmeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView(store: .init(
+                initialState: MainCore.State(),
+                reducer: MainCore.reducer,
+                environment: MainCore.Environment(
+                    scheduler: .main,
+                    service: Services.mainService))
+            )
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Question: Identifiable, Codable {
+public struct Question: Identifiable, Codable, Equatable {
     public let id: Int?
     let frage: String?
     let antwort1: String?
@@ -22,5 +22,16 @@ public struct Question: Identifiable, Codable {
         self.antwort2 = antwort2
         self.richtigeAntwort = richtigeAntwort
         self.erklaerung = erklaerung
+    }
+}
+
+public extension Question {
+    static var mock: Question {
+        Question(id: 1,
+                 frage: "Was war hier falsch?",
+                 antwort1: "Nach Monitoren fragen",
+                 antwort2: "Drohen",
+                 richtigeAntwort: "Drohen",
+                 erklaerung: "Weil schnelle und direkte Kommunikation besser für den Verlauf der Arbeitsprozesse ist.")
     }
 }

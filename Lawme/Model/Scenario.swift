@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Scenario: Identifiable, Codable {
+public struct Scenario: Identifiable, Codable, Equatable {
     public let id: Int?
     let name: String?
     let fragen: [Question]?
@@ -38,5 +38,40 @@ public struct Scenario: Identifiable, Codable {
         self.absatz8 = absatz8
         self.absatz9 = absatz9
         self.absatz10 = absatz10
+    }
+}
+
+public extension Scenario {
+    static var mock: [Scenario] {
+        [
+            Scenario (id: 1,
+                      name: "Kündigen",
+                      fragen: [.mock],
+                      schwierigkeit: .LEICHT,
+                      absatz1: "Du hast die Nase voll von deiner Arbeit.",
+                      absatz2: "Nach stundenlanger Überlegung platzt du in das Büro deiner Vorgesetzten:in.",
+                      absatz3: "Du drohst mit einer Kündigung, wenn du keine neuen Monitore bekommst.",
+                      absatz4: nil,
+                      absatz5: nil,
+                      absatz6: nil,
+                      absatz7: nil,
+                      absatz8: nil,
+                      absatz9: nil,
+                      absatz10: nil),
+            Scenario (id: 2,
+                      name: "Krankenstand",
+                      fragen: [.mock],
+                      schwierigkeit: .LEICHT,
+                      absatz1: "Du hast die Nase voll von deiner Arbeit.",
+                      absatz2: "Nach stundenlanger Überlegung platzt du in das Büro deiner Vorgesetzten:in.",
+                      absatz3: "Du drohst mit einer Kündigung, wenn du keine neuen Monitore bekommst.",
+                      absatz4: nil,
+                      absatz5: nil,
+                      absatz6: nil,
+                      absatz7: nil,
+                      absatz8: nil,
+                      absatz9: nil,
+                      absatz10: nil)
+        ]
     }
 }

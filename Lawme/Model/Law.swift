@@ -22,3 +22,13 @@ public struct Law: Identifiable, Codable {
         self.inhalt = inhalt
     }
 }
+
+public extension Law {
+    static var mock: Law {
+        Law(id: 1,
+            artikel: "Einvernehmlich Kündigen",
+            paragraph: "§ 15 Abs. 3",
+            gesetzBuch: "Strafgesetzbuch",
+            inhalt: "Laut Strafgesetzbuch dürfen Sie folgende Tätigkeit nicht durchführen, wenn folgendes gegeben ist ...")
+    }
+}

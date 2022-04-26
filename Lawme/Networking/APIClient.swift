@@ -1,5 +1,5 @@
 //
-//  NetworkManager.swift
+//  APIClient.swift
 //  Lawme
 //
 //  Created by Ing. Ebu Celik on 24.04.22.
@@ -10,14 +10,12 @@ import Combine
 
 class APIError: Error {}
 
-final class NetworkManager {
+public class APIClient {
     let domain = "http://localhost:8090/api/v1/"
 
-    static let shared = NetworkManager()
+    public init() { }
 
-    fileprivate init() {}
-
-    func call<T>(endpoint: String, method: HTTPMethod, data: T?, parameters: [String: AnyObject]?) -> AnyPublisher<T, Error> where T: Codable {
+    public func call<T>(endpoint: String, method: HTTPMethod, data: T?, parameters: [String: AnyObject]?) -> AnyPublisher<T, Error> where T: Codable {
         Deferred {
             Future { promise in
                 var url = self.domain + endpoint
@@ -61,6 +59,10 @@ final class NetworkManager {
         }
 
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            if let response = response {
+                print("Response >>> \(response)")
+            }
+
             if let error = error {
                 block(.failure(error))
             } else if let data = data {

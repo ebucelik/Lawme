@@ -12,8 +12,19 @@ public protocol LawServiceProtocol {
     func getLaw(endpoint: String, method: HTTPMethod, parameters: [String: AnyObject]?) -> AnyPublisher<[Law], Error>
 }
 
-public class LawService: LawServiceProtocol {
+public class LawService: APIClient, LawServiceProtocol {
     public func getLaw(endpoint: String, method: HTTPMethod, parameters: [String : AnyObject]?) -> AnyPublisher<[Law], Error> {
-        NetworkManager.shared.call(endpoint: endpoint, method: method, data: nil, parameters: parameters)
+        call(endpoint: endpoint, method: method, data: nil, parameters: parameters)
+    }
+}
+
+public class LawServiceMock: LawServiceProtocol {
+    public func getLaw(endpoint: String, method: HTTPMethod, parameters: [String : AnyObject]?) -> AnyPublisher<[Law], Error> {
+        Deferred {
+            Future { promise in
+                promise(.success([.mock]))
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }
