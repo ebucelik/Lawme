@@ -27,11 +27,32 @@ public struct ScenarioView: View {
                 Text(paragraph)
             }
 
-            QuestionBody()
+            if !answers.isEmpty {
+                QuestionBody()
+            }
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
         .padding()
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    func answersChosen() -> Bool {
+        var answerList: [Bool] = []
+
+        answers.forEach({ answer in
+            answer.forEach({
+                if $0 {
+                    answerList.append($0)
+                }
+            })
+        })
+
+        if answerList.count == answers.count {
+            return answerList.allSatisfy({ $0 })
+        } else {
+            return false
+        }
     }
 
     @ViewBuilder
@@ -104,6 +125,20 @@ public struct ScenarioView: View {
 
                     SpaceDivider(height: 30, .none)
                 }
+
+                SpaceDivider(height: 30, .none)
+
+                Button(action: {
+                    print("Submit Answer")
+                }, label: {
+                    Text("Submit answers")
+                        .foregroundColor(answersChosen() ? Color.black : Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
+                })
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(answersChosen() ? Color.orange : Color.gray)
+                .disabled(!answersChosen())
+                .cornerRadius(10)
             }
         }
     }

@@ -14,6 +14,7 @@
 		7159D8F228189F18007AAB9B /* SwiftHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 7159D8F128189F18007AAB9B /* SwiftHelper */; };
 		7159D8F42818A6B0007AAB9B /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159D8F32818A6B0007AAB9B /* Services.swift */; };
 		7159D8F72818B076007AAB9B /* ScenarioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159D8F62818B076007AAB9B /* ScenarioView.swift */; };
+		71E1C443281B304D0046ED66 /* ScenarioCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E1C442281B304D0046ED66 /* ScenarioCore.swift */; };
 		71F791212815BDB00012426E /* LawmeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791202815BDB00012426E /* LawmeApp.swift */; };
 		71F791232815BDB00012426E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791222815BDB00012426E /* MainView.swift */; };
 		71F791252815BDB00012426E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71F791242815BDB00012426E /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		7159D8EF28189EED007AAB9B /* SwiftHelper */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftHelper; path = ../SwiftHelper; sourceTree = "<group>"; };
 		7159D8F32818A6B0007AAB9B /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		7159D8F62818B076007AAB9B /* ScenarioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioView.swift; sourceTree = "<group>"; };
+		71E1C442281B304D0046ED66 /* ScenarioCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioCore.swift; sourceTree = "<group>"; };
 		71F7911D2815BDB00012426E /* Lawme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lawme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71F791202815BDB00012426E /* LawmeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawmeApp.swift; sourceTree = "<group>"; };
 		71F791222815BDB00012426E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				7159D8F62818B076007AAB9B /* ScenarioView.swift */,
+				71E1C442281B304D0046ED66 /* ScenarioCore.swift */,
 			);
 			path = Scenario;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				71F7913E2815BDF90012426E /* Question.swift in Sources */,
 				71F7913D2815BDF90012426E /* LawService.swift in Sources */,
 				71F791412815BDF90012426E /* Difficulty.swift in Sources */,
+				71E1C443281B304D0046ED66 /* ScenarioCore.swift in Sources */,
 				7159D8E628189934007AAB9B /* View+Extension.swift in Sources */,
 				71F791402815BDF90012426E /* Scenario.swift in Sources */,
 				71F791212815BDB00012426E /* LawmeApp.swift in Sources */,
