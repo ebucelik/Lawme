@@ -45,7 +45,9 @@ struct MainView: View {
                 }
                 .padding()
                 .onAppear {
-                    viewStore.send(.getScenarios)
+                    if viewStore.scenariosLoadingState == .none {
+                        viewStore.send(.getScenarios)
+                    }
                 }
                 .navigationBarHidden(true)
             }
@@ -70,7 +72,8 @@ struct MainView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             ForEach(scenarios, id: \.id) { scenario in
-                NavigationLink(destination: ScenarioView(scenario: scenario)) {
+                NavigationLink(destination: ScenarioView(scenario: scenario,
+                                                         answers: getStateAnswers(questionCount: scenario.fragen?.count ?? 0))) {
                     HStack {
                         Text(scenario.name ?? "Test")
 
@@ -87,6 +90,16 @@ struct MainView: View {
                 SpaceDivider(height: 15, .none)
             }
         }
+    }
+
+    func getStateAnswers(questionCount: Int) -> [[Bool]] {
+        var stateAnswers: [[Bool]] = []
+
+        (0..<questionCount).forEach { _ in
+            stateAnswers.append([false, false, false])
+        }
+
+        return stateAnswers
     }
 }
 

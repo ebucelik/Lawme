@@ -23,6 +23,23 @@ public struct Scenario: Identifiable, Codable, Equatable {
     let absatz9: String?
     let absatz10: String?
 
+    public var paragraphs: [String] {
+        let paragraph: [String] = [
+            absatz1 ?? "",
+            absatz2 ?? "",
+            absatz3 ?? "",
+            absatz4 ?? "",
+            absatz5 ?? "",
+            absatz6 ?? "",
+            absatz7 ?? "",
+            absatz8 ?? "",
+            absatz9 ?? "",
+            absatz10 ?? "",
+        ]
+
+        return paragraph.compactMap { return !$0.isEmpty ? $0 : nil }
+    }
+
     public init(id: Int?, name: String?, fragen: [Question]?, schwierigkeit: Difficulty?, absatz1: String?, absatz2: String?, absatz3: String?, absatz4: String?, absatz5: String?, absatz6: String?, absatz7: String?, absatz8: String?, absatz9: String?, absatz10: String?) {
         self.id = id
         self.name = name
