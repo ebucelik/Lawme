@@ -7,8 +7,9 @@
 
 import Foundation
 
-public enum Difficulty: String, Codable, Equatable {
+public enum Difficulty: String, Codable, Equatable, CaseIterable {
     case LEICHT
     case MITTEL
     case SCHWER
+    case none = ""
 }

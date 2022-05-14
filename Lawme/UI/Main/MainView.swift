@@ -13,12 +13,15 @@ struct MainView: View {
     var store: Store<MainCore.State, MainCore.Action>
     typealias MainViewStore = ViewStore<MainCore.State, MainCore.Action>
 
+    @State
+    var difficulty: Difficulty = .LEICHT
+
     var body: some View {
         WithViewStore(store) { viewStore in
             NavigationView {
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        Text("Willkommen bei \nLawme")
+                        Text("Willkommen bei \nLawMe")
                             .font(.largeTitle.bold())
                             .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -72,8 +75,12 @@ struct MainView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             ForEach(scenarios, id: \.id) { scenario in
-                NavigationLink(destination: ScenarioView(scenario: scenario,
-                                                         answers: getStateAnswers(questionCount: scenario.fragen?.count ?? 0))) {
+                NavigationLink(
+                    destination: ScenarioView(
+                        scenario: scenario,
+                        answers: getStateAnswers(questions: scenario.fragen)
+                    )
+                ) {
                     HStack {
                         Text(scenario.name ?? "Test")
 
@@ -89,14 +96,51 @@ struct MainView: View {
 
                 SpaceDivider(height: 15, .none)
             }
+
+            SpaceDivider()
+
+            Text("Mehr")
+                .font(.subheadline.bold())
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            ForEach(More.allCases, id: \.self) { more in
+                NavigationLink(
+                    destination: MoreView(more: more)
+                ) {
+                    HStack {
+                        Text(more.rawValue)
+
+                        Spacer()
+
+                        Image(systemName: "chevron.right")
+                    }
+                    .padding()
+                    .background(Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
+                    .cornerRadius(10)
+                }
+                .foregroundColor(.black)
+            }
+
+            SpaceDivider(height: 15, .none)
+
+            Text("Copyright © LawMe 2022")
+                .font(.system(size: 10))
+                .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 
-    func getStateAnswers(questionCount: Int) -> [[Bool]] {
+    func getStateAnswers(questions: [Question]) -> [[Bool]] {
+        var answers: [Bool] = []
         var stateAnswers: [[Bool]] = []
 
-        (0..<questionCount).forEach { _ in
-            stateAnswers.append([false, false, false])
+        questions.forEach { question in
+            question.antworten.forEach { _ in
+                answers.append(false)
+            }
+
+            stateAnswers.append(answers)
+
+            answers = []
         }
 
         return stateAnswers

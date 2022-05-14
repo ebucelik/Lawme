@@ -14,7 +14,9 @@
 		7159D8F228189F18007AAB9B /* SwiftHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 7159D8F128189F18007AAB9B /* SwiftHelper */; };
 		7159D8F42818A6B0007AAB9B /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159D8F32818A6B0007AAB9B /* Services.swift */; };
 		7159D8F72818B076007AAB9B /* ScenarioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159D8F62818B076007AAB9B /* ScenarioView.swift */; };
-		71E1C443281B304D0046ED66 /* ScenarioCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E1C442281B304D0046ED66 /* ScenarioCore.swift */; };
+		71D91158282FDEA500919F26 /* LawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D91157282FDEA500919F26 /* LawView.swift */; };
+		71D9115B282FE30200919F26 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D9115A282FE30200919F26 /* MoreView.swift */; };
+		71D9115D282FE32A00919F26 /* More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D9115C282FE32A00919F26 /* More.swift */; };
 		71F791212815BDB00012426E /* LawmeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791202815BDB00012426E /* LawmeApp.swift */; };
 		71F791232815BDB00012426E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F791222815BDB00012426E /* MainView.swift */; };
 		71F791252815BDB00012426E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71F791242815BDB00012426E /* Assets.xcassets */; };
@@ -37,7 +39,9 @@
 		7159D8EF28189EED007AAB9B /* SwiftHelper */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftHelper; path = ../SwiftHelper; sourceTree = "<group>"; };
 		7159D8F32818A6B0007AAB9B /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		7159D8F62818B076007AAB9B /* ScenarioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioView.swift; sourceTree = "<group>"; };
-		71E1C442281B304D0046ED66 /* ScenarioCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioCore.swift; sourceTree = "<group>"; };
+		71D91157282FDEA500919F26 /* LawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawView.swift; sourceTree = "<group>"; };
+		71D9115A282FE30200919F26 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		71D9115C282FE32A00919F26 /* More.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = More.swift; sourceTree = "<group>"; };
 		71F7911D2815BDB00012426E /* Lawme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lawme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71F791202815BDB00012426E /* LawmeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawmeApp.swift; sourceTree = "<group>"; };
 		71F791222815BDB00012426E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 				7159D8E32818940F007AAB9B /* Direction.swift */,
 				7159D8E528189934007AAB9B /* View+Extension.swift */,
 				7159D8F32818A6B0007AAB9B /* Services.swift */,
+				71D9115C282FE32A00919F26 /* More.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -78,6 +83,8 @@
 		7159D8EC28189E68007AAB9B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				71D91159282FE2D200919F26 /* More */,
+				71D91156282FDE9200919F26 /* Law */,
 				7159D8F52818B063007AAB9B /* Scenario */,
 				7159D8ED28189E72007AAB9B /* Main */,
 			);
@@ -112,9 +119,24 @@
 			isa = PBXGroup;
 			children = (
 				7159D8F62818B076007AAB9B /* ScenarioView.swift */,
-				71E1C442281B304D0046ED66 /* ScenarioCore.swift */,
 			);
 			path = Scenario;
+			sourceTree = "<group>";
+		};
+		71D91156282FDE9200919F26 /* Law */ = {
+			isa = PBXGroup;
+			children = (
+				71D91157282FDEA500919F26 /* LawView.swift */,
+			);
+			path = Law;
+			sourceTree = "<group>";
+		};
+		71D91159282FE2D200919F26 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				71D9115A282FE30200919F26 /* MoreView.swift */,
+			);
+			path = More;
 			sourceTree = "<group>";
 		};
 		71F791142815BDB00012426E = {
@@ -271,13 +293,15 @@
 				71F791232815BDB00012426E /* MainView.swift in Sources */,
 				7159D8EB28189E59007AAB9B /* MainCore.swift in Sources */,
 				7159D8E42818940F007AAB9B /* Direction.swift in Sources */,
+				71D91158282FDEA500919F26 /* LawView.swift in Sources */,
 				71F7913E2815BDF90012426E /* Question.swift in Sources */,
 				71F7913D2815BDF90012426E /* LawService.swift in Sources */,
+				71D9115D282FE32A00919F26 /* More.swift in Sources */,
 				71F791412815BDF90012426E /* Difficulty.swift in Sources */,
-				71E1C443281B304D0046ED66 /* ScenarioCore.swift in Sources */,
 				7159D8E628189934007AAB9B /* View+Extension.swift in Sources */,
 				71F791402815BDF90012426E /* Scenario.swift in Sources */,
 				71F791212815BDB00012426E /* LawmeApp.swift in Sources */,
+				71D9115B282FE30200919F26 /* MoreView.swift in Sources */,
 				71F7913F2815BDF90012426E /* Law.swift in Sources */,
 				7159D8F72818B076007AAB9B /* ScenarioView.swift in Sources */,
 			);

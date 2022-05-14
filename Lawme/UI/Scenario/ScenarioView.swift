@@ -13,6 +13,12 @@ public struct ScenarioView: View {
 
     @State
     var answers: [[Bool]]
+    @State
+    var checkAnswers: Bool = false
+
+    let greenColor = Color(.sRGB, red: 152/255, green: 191/255, blue: 100/255, opacity: 1)
+    let grayColor = Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1)
+    let blueColor = Color(.sRGB, red: 125/255, green: 168/255, blue: 208/255, opacity: 1)
 
     public init(scenario: Scenario, answers: [[Bool]]) {
         self.scenario = scenario
@@ -23,8 +29,14 @@ public struct ScenarioView: View {
 
     public var body: some View {
         TabView {
-            ForEach(scenario.paragraphs, id: \.self) { paragraph in
-                Text(paragraph)
+            ForEach(scenario.absaetze, id: \.self) { paragraph in
+                VStack(spacing: 50) {
+                    Image(systemName: "tortoise.fill")
+                        .resizable()
+                        .frame(width: 150, height: 100)
+
+                    Text(paragraph)
+                }
             }
 
             if !answers.isEmpty {
@@ -58,88 +70,106 @@ public struct ScenarioView: View {
     @ViewBuilder
     func QuestionBody() -> some View {
         ScrollView(showsIndicators: false) {
-            if let questions = scenario.fragen {
-                ForEach(Array(questions.enumerated()), id: \.offset) { index, question in
+            ForEach(Array(scenario.fragen.enumerated()), id: \.offset) { index, question in
+                HStack {
                     Text(question.frage ?? "")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.title2.bold())
 
-                    SpaceDivider(height: 30, .bottom)
-
-                    Label(title: {
-                        Text(question.antwort1 ?? "")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                            .background(Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
-                            .cornerRadius(10)
-                    }, icon: {
-                        if answers[index][0] {
-                            Image(systemName: "circle.circle.fill")
-                        } else {
-                            Image(systemName: "circle")
-                        }
-                    })
-                    .onTapGesture {
-                        answers[index][0] = true
-                        answers[index][1] = false
-                        answers[index][2] = false
-                    }
-
-                    Label(title: {
-                        Text(question.antwort2 ?? "")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                            .background(Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
-                            .cornerRadius(10)
-                    }, icon: {
-                        if answers[index][1] {
-                            Image(systemName: "circle.circle.fill")
-                        } else {
-                            Image(systemName: "circle")
-                        }
-                    })
-                    .onTapGesture {
-                        answers[index][0] = false
-                        answers[index][1] = true
-                        answers[index][2] = false
-                    }
-
-                    Label(title: {
-                        Text(question.richtigeAntwort ?? "")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                            .background(Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
-                            .cornerRadius(10)
-                    }, icon: {
-                        if answers[index][2] {
-                            Image(systemName: "circle.circle.fill")
-                        } else {
-                            Image(systemName: "circle")
-                        }
-                    })
-                    .onTapGesture {
-                        answers[index][0] = false
-                        answers[index][1] = false
-                        answers[index][2] = true
-                    }
-
-                    SpaceDivider(height: 30, .none)
+                    Text((question.schwierigkeit ?? .none).rawValue)
+                        .foregroundColor(.gray)
                 }
 
-                SpaceDivider(height: 30, .none)
+                SpaceDivider(.bottom)
 
+                AnswersBody(for: index, question)
+
+                SpaceDivider(.none)
+            }
+
+            SpaceDivider(height: 15, .none)
+
+            HStack {
                 Button(action: {
-                    print("Submit Answer")
+                    withAnimation(.spring()) {
+                        checkAnswers = true
+                    }
                 }, label: {
-                    Text("Submit answers")
-                        .foregroundColor(answersChosen() ? Color.black : Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
+                    Text("Antworten überprüfen")
+                        .foregroundColor(answersChosen() ? Color.black : grayColor)
                 })
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(answersChosen() ? Color.orange : Color.gray)
+                .background(answersChosen() ? greenColor : Color.gray)
                 .disabled(!answersChosen())
                 .cornerRadius(10)
+
+                if checkAnswers {
+                    Divider()
+
+                    NavigationLink(destination: {
+                        LawView()
+                    }, label: {
+                        Text("Mehr dazu")
+                            .foregroundColor(.black)
+                            .frame(maxHeight: .infinity)
+                    })
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(blueColor)
+                    .cornerRadius(10)
+                }
             }
+            .padding(.bottom, 100)
+        }
+    }
+
+    @ViewBuilder
+    func AnswersBody(for index: Int, _ question: Question) -> some View {
+        ForEach(Array(question.antworten.enumerated()), id: \.offset) { answerIndex, answer in
+            Label(title: {
+                Text(answer)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(grayColor)
+                    .cornerRadius(10)
+            }, icon: {
+                if answers[index][answerIndex] {
+                    if checkAnswers {
+                        if answer == question.richtigeAntwort {
+                            Image(systemName: "checkmark.circle.fill").foregroundColor(greenColor)
+                        } else {
+                            Image(systemName: "x.circle.fill").foregroundColor(.red)
+                        }
+                    } else {
+                        Image(systemName: "circle.circle.fill")
+                    }
+                } else {
+                    Image(systemName: "circle")
+                }
+            })
+            .onTapGesture {
+                if !checkAnswers {
+                    for (stateAnswerIndex, _) in answers[index].enumerated() {
+                        answers[index][stateAnswerIndex] = false
+                    }
+
+                    answers[index][answerIndex] = true
+                }
+            }
+        }
+
+        if checkAnswers {
+            HStack {
+                Text("Erklärung")
+
+                Divider()
+                    .frame(width: 16)
+
+                Text(question.erklaerung ?? "")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.top, 30)
         }
     }
 }

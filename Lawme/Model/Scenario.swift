@@ -10,85 +10,44 @@ import Foundation
 public struct Scenario: Identifiable, Codable, Equatable {
     public let id: Int?
     let name: String?
-    let fragen: [Question]?
-    let schwierigkeit: Difficulty?
-    let absatz1: String?
-    let absatz2: String?
-    let absatz3: String?
-    let absatz4: String?
-    let absatz5: String?
-    let absatz6: String?
-    let absatz7: String?
-    let absatz8: String?
-    let absatz9: String?
-    let absatz10: String?
+    let fragen: [Question]
+    let thema: String?
+    let absaetze: [String]
 
-    public var paragraphs: [String] {
-        let paragraph: [String] = [
-            absatz1 ?? "",
-            absatz2 ?? "",
-            absatz3 ?? "",
-            absatz4 ?? "",
-            absatz5 ?? "",
-            absatz6 ?? "",
-            absatz7 ?? "",
-            absatz8 ?? "",
-            absatz9 ?? "",
-            absatz10 ?? "",
-        ]
-
-        return paragraph.compactMap { return !$0.isEmpty ? $0 : nil }
-    }
-
-    public init(id: Int?, name: String?, fragen: [Question]?, schwierigkeit: Difficulty?, absatz1: String?, absatz2: String?, absatz3: String?, absatz4: String?, absatz5: String?, absatz6: String?, absatz7: String?, absatz8: String?, absatz9: String?, absatz10: String?) {
+    public init(id: Int?, name: String?, fragen: [Question], thema: String?, absaetze: [String]) {
         self.id = id
         self.name = name
         self.fragen = fragen
-        self.schwierigkeit = schwierigkeit
-        self.absatz1 = absatz1
-        self.absatz2 = absatz2
-        self.absatz3 = absatz3
-        self.absatz4 = absatz4
-        self.absatz5 = absatz5
-        self.absatz6 = absatz6
-        self.absatz7 = absatz7
-        self.absatz8 = absatz8
-        self.absatz9 = absatz9
-        self.absatz10 = absatz10
+        self.thema = thema
+        self.absaetze = absaetze
     }
 }
 
 public extension Scenario {
     static var mock: [Scenario] {
         [
-            Scenario (id: 1,
-                      name: "Kündigen",
-                      fragen: [.mock],
-                      schwierigkeit: .LEICHT,
-                      absatz1: "Du hast die Nase voll von deiner Arbeit.",
-                      absatz2: "Nach stundenlanger Überlegung platzt du in das Büro deiner Vorgesetzten:in.",
-                      absatz3: "Du drohst mit einer Kündigung, wenn du keine neuen Monitore bekommst.",
-                      absatz4: nil,
-                      absatz5: nil,
-                      absatz6: nil,
-                      absatz7: nil,
-                      absatz8: nil,
-                      absatz9: nil,
-                      absatz10: nil),
-            Scenario (id: 2,
-                      name: "Krankenstand",
-                      fragen: [.mock],
-                      schwierigkeit: .LEICHT,
-                      absatz1: "Du hast die Nase voll von deiner Arbeit.",
-                      absatz2: "Nach stundenlanger Überlegung platzt du in das Büro deiner Vorgesetzten:in.",
-                      absatz3: "Du drohst mit einer Kündigung, wenn du keine neuen Monitore bekommst.",
-                      absatz4: nil,
-                      absatz5: nil,
-                      absatz6: nil,
-                      absatz7: nil,
-                      absatz8: nil,
-                      absatz9: nil,
-                      absatz10: nil)
+            Scenario(
+                id: 1,
+                name: "Kündigen",
+                fragen: [.mock],
+                thema: "",
+                absaetze: [
+                    "Du hast die Nase voll von deiner Arbeit.",
+                    "Nach stundenlanger Überlegung platzt du in das Büro deiner Vorgesetzten:in.",
+                    "Du drohst mit einer Kündigung, wenn du keine neuen Monitore bekommst."
+                ]
+            ),
+            Scenario(
+                id: 2,
+                name: "Krankenstand",
+                fragen: [.mock],
+                thema: "",
+                absaetze: [
+                    "Du hast die Nase voll von deiner Arbeit.",
+                    "Nach stundenlanger Überlegung platzt du in das Büro deiner Vorgesetzten:in.",
+                    "Du drohst mit einer Kündigung, wenn du keine neuen Monitore bekommst."
+                ]
+            )
         ]
     }
 }
