@@ -48,6 +48,8 @@ public class APIClient {
     private func call<T>(url: URL, method: HTTPMethod, data: T?, block: @escaping (Result<T, Error>) -> ()) throws where T: Codable {
 
         var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
         urlRequest.httpMethod = method.rawValue
 
         if let data = data {

@@ -16,10 +16,6 @@ public struct ScenarioView: View {
     @State
     var checkAnswers: Bool = false
 
-    let greenColor = Color(.sRGB, red: 152/255, green: 191/255, blue: 100/255, opacity: 1)
-    let grayColor = Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1)
-    let blueColor = Color(.sRGB, red: 125/255, green: 168/255, blue: 208/255, opacity: 1)
-
     public init(scenario: Scenario, answers: [[Bool]]) {
         self.scenario = scenario
         self.answers = answers
@@ -96,11 +92,11 @@ public struct ScenarioView: View {
                     }
                 }, label: {
                     Text("Antworten überprüfen")
-                        .foregroundColor(answersChosen() ? Color.black : grayColor)
+                        .foregroundColor(answersChosen() ? Color.black : Colors.GrayColor)
                 })
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(answersChosen() ? greenColor : Color.gray)
+                .background(answersChosen() ? Colors.GreenColor : Color.gray)
                 .disabled(!answersChosen())
                 .cornerRadius(10)
 
@@ -116,7 +112,7 @@ public struct ScenarioView: View {
                     })
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(blueColor)
+                    .background(Colors.BlueColor)
                     .cornerRadius(10)
                 }
             }
@@ -131,13 +127,13 @@ public struct ScenarioView: View {
                 Text(answer)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(grayColor)
+                    .background(Colors.GrayColor)
                     .cornerRadius(10)
             }, icon: {
                 if answers[index][answerIndex] {
                     if checkAnswers {
                         if answer == question.richtigeAntwort {
-                            Image(systemName: "checkmark.circle.fill").foregroundColor(greenColor)
+                            Image(systemName: "checkmark.circle.fill").foregroundColor(Colors.GreenColor)
                         } else {
                             Image(systemName: "x.circle.fill").foregroundColor(.red)
                         }

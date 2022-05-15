@@ -21,8 +21,12 @@ struct MainView: View {
             NavigationView {
                 ScrollView(showsIndicators: false) {
                     VStack {
+                        Image("icon", bundle: .main)
+                            .resizable()
+                            .frame(width: 150, height: 150)
+
                         Text("Willkommen bei \nLawMe")
-                            .font(.largeTitle.bold())
+                            .font(.title.bold())
                             .frame(maxWidth: .infinity, alignment: .leading)
 
                         Text("Deinem Arbeitsrecht Experten To-Go")
@@ -65,9 +69,16 @@ struct MainView: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: .black))
 
         case let .error(error):
-            Text("While fetching data an error has happened: \(error.localizedDescription)")
-                .font(.title3.bold())
-                .frame(maxWidth: .infinity, alignment: .center)
+            VStack(spacing: 20) {
+                Image(systemName: "exclamationmark.icloud.fill")
+                    .resizable()
+                    .frame(width: 100, height: 75)
+                    .foregroundColor(.black)
+
+                Text("While fetching data an error has happened: \n\n\(error.localizedDescription)")
+                    .font(.title3.bold())
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
 
         case let .loaded(scenarios):
             Text("Szenarien")

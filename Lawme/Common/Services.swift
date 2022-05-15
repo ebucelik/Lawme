@@ -11,4 +11,8 @@ public class Services {
     static var mainService: MainServiceProtocol {
         MainService()
     }
+
+    static var loginService: LoginServiceProtocol {
+        LoginService()
+    }
 }
