@@ -15,14 +15,10 @@ struct LoginView: View {
     let store: Store<LoginCore.State, LoginCore.Action>
     typealias LoginViewStore = ViewStore<LoginCore.State, LoginCore.Action>
 
-    @State
-    var user: User = .emptyMock
-    @State
-    var noAccount = false
-    @State
-    var showMainView = false
-    @State
-    var showErrorAlert = true
+    @State var user: User = .emptyMock
+    @State var noAccount = false
+    @State var showMainView = false
+    @State var showErrorAlert = true
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -43,8 +39,20 @@ struct LoginView: View {
                             scheduler: .main,
                             service: Services.mainService
                         )
-                    )
+                    ),
+                    user: user
                 )
+            }
+        }
+        .onAppear {
+            if let userData = UserDefaults.standard.object(forKey: LoginCore.LoginKey) as? Data {
+                do {
+                    user = try JSONDecoder().decode(User.self, from: userData)
+
+                    showMainView = true
+                } catch {
+                    print("Decoding of \(userData) failed.")
+                }
             }
         }
     }

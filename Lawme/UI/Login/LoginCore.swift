@@ -13,6 +13,7 @@ import SwiftHelper
 
 public class LoginCore {
 
+    public static let LoginKey = "Login"
     public typealias UserLoadingState = Loadable<User>
 
     public struct State: Equatable {
@@ -53,6 +54,14 @@ public class LoginCore {
             state.userLoadingState = userLoadingState
 
             if case let .loaded(user) = userLoadingState {
+                do {
+                    let data = try JSONEncoder().encode(user)
+
+                    UserDefaults.standard.set(data, forKey: LoginCore.LoginKey)
+                } catch {
+                    print("Encoding of \(user) failed.")
+                }
+
                 state.user = user
             }
 

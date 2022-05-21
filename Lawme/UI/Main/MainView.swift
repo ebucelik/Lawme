@@ -10,11 +10,12 @@ import ComposableArchitecture
 
 struct MainView: View {
 
-    var store: Store<MainCore.State, MainCore.Action>
     typealias MainViewStore = ViewStore<MainCore.State, MainCore.Action>
+    let store: Store<MainCore.State, MainCore.Action>
+    let user: User
 
-    @State
-    var difficulty: Difficulty = .LEICHT
+    @State var difficulty: Difficulty = .LEICHT
+    @State var presentRankingList = false
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -47,6 +48,8 @@ struct MainView: View {
 
                         SpaceDivider()
 
+                        accountBody()
+
                         stateBody(viewStore)
                     }
                 }
@@ -59,6 +62,70 @@ struct MainView: View {
                 .navigationBarHidden(true)
             }
         }
+    }
+
+    @ViewBuilder
+    func accountBody() -> some View {
+        Text("Dein Profil")
+            .font(.subheadline.bold())
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+        VStack {
+            HStack {
+                Text("E-Mail")
+                    .foregroundColor(.gray)
+                    .font(.footnote.bold())
+                    .frame(maxWidth: 125, alignment: .center)
+
+                Divider()
+
+                Text(user.email)
+                    .font(.footnote)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+
+            HStack {
+                Text("Benutzername")
+                    .foregroundColor(.gray)
+                    .font(.footnote.bold())
+                    .frame(maxWidth: 125, alignment: .center)
+
+                Divider()
+
+                Text(user.username)
+                    .font(.footnote)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+
+            HStack {
+                Text("Punkte")
+                    .foregroundColor(.gray)
+                    .font(.footnote.bold())
+                    .frame(maxWidth: 125, alignment: .center)
+
+                Divider()
+
+                Text("\(user.points)")
+                    .font(.footnote)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+
+            SpaceDivider(.none)
+
+            Button(action: {
+                print("sdsd")
+            }, label: {
+                Text("Bearbeiten")
+                    .foregroundColor(.black)
+                    .font(.subheadline.bold())
+            })
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(5)
+            .background(Colors.BlueColor)
+            .cornerRadius(5)
+        }
+
+        SpaceDivider()
     }
 
     @ViewBuilder
@@ -81,62 +148,131 @@ struct MainView: View {
             }
 
         case let .loaded(scenarios):
-            Text("Szenarien")
-                .font(.subheadline.bold())
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            ForEach(scenarios, id: \.id) { scenario in
-                NavigationLink(
-                    destination: ScenarioView(
-                        scenario: scenario,
-                        answers: getStateAnswers(questions: scenario.fragen)
-                    )
-                ) {
-                    HStack {
-                        Text(scenario.name ?? "Test")
-
-                        Spacer()
-
-                        Image(systemName: "chevron.right")
-                    }
-                    .padding()
-                    .background(Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
-                    .cornerRadius(10)
-                }
-                .foregroundColor(.black)
-
-                SpaceDivider(height: 15, .none)
-            }
+            scenarioBody(scenarios)
 
             SpaceDivider()
 
-            Text("Mehr")
-                .font(.subheadline.bold())
-                .frame(maxWidth: .infinity, alignment: .leading)
+            rankingListBody()
 
-            ForEach(More.allCases, id: \.self) { more in
-                NavigationLink(
-                    destination: MoreView(more: more)
-                ) {
-                    HStack {
-                        Text(more.rawValue)
+            SpaceDivider()
 
-                        Spacer()
-
-                        Image(systemName: "chevron.right")
-                    }
-                    .padding()
-                    .background(Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
-                    .cornerRadius(10)
-                }
-                .foregroundColor(.black)
-            }
+            moreBody()
 
             SpaceDivider(height: 15, .none)
 
             Text("Copyright © LawMe 2022")
                 .font(.system(size: 10))
                 .frame(maxWidth: .infinity, alignment: .center)
+        }
+    }
+
+    @ViewBuilder
+    func scenarioBody(_ scenarios: [Scenario]) -> some View {
+        Text("Szenarien")
+            .font(.subheadline.bold())
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+        ForEach(scenarios, id: \.id) { scenario in
+            NavigationLink(
+                destination: ScenarioView(
+                    scenario: scenario,
+                    answers: getStateAnswers(questions: scenario.fragen)
+                )
+            ) {
+                HStack {
+                    Text(scenario.name ?? "Test")
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                }
+                .padding()
+                .background(Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
+                .cornerRadius(10)
+            }
+            .foregroundColor(.black)
+
+            SpaceDivider(height: 15, .none)
+        }
+    }
+
+    @ViewBuilder
+    func rankingListBody() -> some View {
+        Text("Rangliste")
+            .font(.subheadline.bold())
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+        HStack {
+            Text("Benutzername")
+                .font(.footnote.bold())
+                .frame(maxWidth: .infinity, alignment: .center)
+
+            Text("Punkte")
+                .font(.footnote.bold())
+                .frame(maxWidth: .infinity, alignment: .center)
+        }
+        .padding(5)
+
+        ForEach(User.listMock.sorted(by: { $0.points > $1.points } ).prefix(3), id: \.id) { user in
+            HStack {
+                Text(user.username)
+                    .foregroundColor(.gray)
+                    .font(.footnote.bold())
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+                Text("\(user.points)")
+                    .foregroundColor(.gray)
+                    .font(.footnote.bold())
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+            .padding(5)
+            .background(Colors.GrayColor)
+            .cornerRadius(5)
+        }
+
+        SpaceDivider(.none)
+
+        Button(action: {
+            presentRankingList = true
+        }, label: {
+            Text("Ganze Rangliste öffnen")
+                .foregroundColor(.black)
+                .font(.subheadline.bold())
+        })
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(5)
+        .background(Colors.BlueColor)
+        .cornerRadius(5)
+        .sheet(isPresented: $presentRankingList) {
+            RankingListView(
+                presentRankingList: $presentRankingList,
+                users: User.listMock
+            )
+        }
+    }
+
+    @ViewBuilder
+    func moreBody() -> some View {
+        Text("Mehr")
+            .font(.subheadline.bold())
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+        ForEach(More.allCases, id: \.self) { more in
+            NavigationLink(
+                destination: MoreView(more: more)
+            ) {
+                HStack {
+                    Text(more.rawValue)
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                }
+                .padding()
+                .background(Color(.sRGB, red: 241/255, green: 241/255, blue: 241/255, opacity: 1))
+                .cornerRadius(10)
+            }
+            .foregroundColor(.black)
         }
     }
 
@@ -160,12 +296,16 @@ struct MainView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(store: .init(
-            initialState: MainCore.State(scenariosLoadingState: .loaded(Scenario.mock)),
-            reducer: MainCore.reducer,
-            environment: MainCore.Environment(
-                scheduler: .main,
-                service: Services.mainService))
+        MainView(
+            store: .init(
+                initialState: MainCore.State(scenariosLoadingState: .loaded(Scenario.mock)),
+                reducer: MainCore.reducer,
+                environment: MainCore.Environment(
+                    scheduler: .main,
+                    service: Services.mainService
+                )
+            ),
+            user: .mock
         )
     }
 }

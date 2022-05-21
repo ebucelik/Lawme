@@ -43,4 +43,44 @@ extension User {
             points: -1
         )
     }
+
+    static var listMock: [User] {
+        [
+            User(
+                id: 1,
+                email: "ebucelik1@hotmail.at",
+                username: "ebucelik10",
+                password: nil,
+                points: 10
+            ),
+            User(
+                id: 2,
+                email: "tomcruise@hotmail.com",
+                username: "tommy",
+                password: nil,
+                points: 12
+            ),
+            User(
+                id: 3,
+                email: "johnnydepp@gmail.com",
+                username: "depp11",
+                password: nil,
+                points: 7
+            ),
+            User(
+                id: 4,
+                email: "elonmusk@gmx.com",
+                username: "elonmusky",
+                password: nil,
+                points: 13
+            ),
+            User(
+                id: 5,
+                email: "stevejobs@icloud.com",
+                username: "applexjobs",
+                password: nil,
+                points: 5
+            )
+        ]
+    }
 }
