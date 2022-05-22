@@ -16,6 +16,7 @@ struct MainView: View {
 
     @State var difficulty: Difficulty = .LEICHT
     @State var presentRankingList = false
+    @State var presentCreateScenario = false
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -193,6 +194,28 @@ struct MainView: View {
             .foregroundColor(.black)
 
             SpaceDivider(height: 15, .none)
+        }
+
+        SpaceDivider(height: 15, .none)
+
+        Button(action: {
+            presentCreateScenario = true
+        }, label: {
+            Text("Eigenes Scenario einreichen")
+                .foregroundColor(.black)
+                .font(.subheadline.bold())
+        })
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(5)
+        .background(Colors.BlueColor)
+        .cornerRadius(5)
+        .fullScreenCover(isPresented: $presentCreateScenario) {
+            CreateScenarioView(
+                store: .init(
+                    initialState: CreateScenarioCore.State(),
+                    reducer: CreateScenarioCore.reducer,
+                    environment: CreateScenarioCore.Environment(scheduler: .main))
+            )
         }
     }
 

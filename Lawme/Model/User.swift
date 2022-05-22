@@ -12,13 +12,20 @@ public struct User: Identifiable, Codable, Equatable {
     var email: String
     var username: String
     var password: String?
+    let userRole: UserRole
     let points: Int
 
-    public init(id: Int, email: String, username: String, password: String?, points: Int) {
+    public enum UserRole: String, Codable, Equatable {
+        case USER
+        case ADMIN
+    }
+
+    public init(id: Int, email: String, username: String, password: String?, userRole: UserRole, points: Int) {
         self.id = id
         self.email = email
         self.username = username
         self.password = password
+        self.userRole = userRole
         self.points = points
     }
 }
@@ -30,6 +37,7 @@ extension User {
             email: "ebucelik1@hotmail.com",
             username: "ebucelik10",
             password: nil,
+            userRole: .ADMIN,
             points: 7
         )
     }
@@ -40,6 +48,7 @@ extension User {
             email: "",
             username: "",
             password: nil,
+            userRole: .USER,
             points: -1
         )
     }
@@ -51,6 +60,7 @@ extension User {
                 email: "ebucelik1@hotmail.at",
                 username: "ebucelik10",
                 password: nil,
+                userRole: .ADMIN,
                 points: 10
             ),
             User(
@@ -58,6 +68,7 @@ extension User {
                 email: "tomcruise@hotmail.com",
                 username: "tommy",
                 password: nil,
+                userRole: .USER,
                 points: 12
             ),
             User(
@@ -65,6 +76,7 @@ extension User {
                 email: "johnnydepp@gmail.com",
                 username: "depp11",
                 password: nil,
+                userRole: .USER,
                 points: 7
             ),
             User(
@@ -72,6 +84,7 @@ extension User {
                 email: "elonmusk@gmx.com",
                 username: "elonmusky",
                 password: nil,
+                userRole: .USER,
                 points: 13
             ),
             User(
@@ -79,6 +92,7 @@ extension User {
                 email: "stevejobs@icloud.com",
                 username: "applexjobs",
                 password: nil,
+                userRole: .USER,
                 points: 5
             )
         ]

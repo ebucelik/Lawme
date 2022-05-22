@@ -15,6 +15,15 @@ public class APIClient {
 
     public init() { }
 
+    public func asyncCall<T>(endpoint: String, method: HTTPMethod, data: T?, parameters: [String: AnyObject]?) async throws -> T where T: Codable {
+        return try await withCheckedThrowingContinuation { continuation in
+            _ = call(endpoint: endpoint, method: method, data: data, parameters: parameters)
+                .receive(on: DispatchQueue.main.eraseToAnyScheduler())
+                .map { continuation.resume(returning: $0) }
+                .catch { Just(continuation.resume(throwing: $0)) }
+        }
+    }
+
     public func call<T>(endpoint: String, method: HTTPMethod, data: T?, parameters: [String: AnyObject]?) -> AnyPublisher<T, Error> where T: Codable {
         Deferred {
             Future { promise in

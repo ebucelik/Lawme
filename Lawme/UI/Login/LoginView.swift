@@ -78,6 +78,10 @@ struct LoginView: View {
         case .loaded:
             success()
                 .onAppear {
+                    if let user = viewStore.user {
+                        self.user = user
+                    }
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         showMainView = true
                     }

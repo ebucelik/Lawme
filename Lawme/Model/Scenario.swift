@@ -9,10 +9,10 @@ import Foundation
 
 public struct Scenario: Identifiable, Codable, Equatable {
     public let id: Int?
-    let name: String?
-    let fragen: [Question]
-    let thema: String?
-    let absaetze: [String]
+    public var name: String?
+    public var fragen: [Question]
+    public var thema: String?
+    public var absaetze: [String]
 
     public init(id: Int?, name: String?, fragen: [Question], thema: String?, absaetze: [String]) {
         self.id = id
@@ -49,5 +49,15 @@ public extension Scenario {
                 ]
             )
         ]
+    }
+
+    static var emptyMock: Scenario {
+        Scenario(
+            id: nil,
+            name: nil,
+            fragen: [],
+            thema: nil,
+            absaetze: [""]
+        )
     }
 }
