@@ -31,7 +31,7 @@ struct MainView: View {
                             .font(.title.bold())
                             .frame(maxWidth: .infinity, alignment: .leading)
 
-                        Text("Deinem Arbeitsrecht Experten To-Go")
+                        Text("Deine Rechtslearning App To-Go")
                             .font(.subheadline.bold())
                             .frame(maxWidth: .infinity, alignment: .leading)
 

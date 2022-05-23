@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LawView: View {
     var body: some View {
-        Text("Gesetze")
+        Text("Für Angestellte ist diese Frage in § 8 AngG, allenfalls vorhandene Kollektivverträge sind zu beachten.")
     }
 }
 
